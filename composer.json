@@ -1,0 +1,16 @@
+{
+    "name": "activismebe/kickstart",
+    "description": "Kickstart template for new Activisme_BE systems",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim Joosten",
+            "email": "Tjoosten3@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "robmorgan/phinx": "^0.8.0"
+    }
+}
