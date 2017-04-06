@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "php": ">=7.0.0",
         "robmorgan/phinx": "^0.8.0"
     }
 }
