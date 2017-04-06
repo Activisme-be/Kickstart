@@ -120,7 +120,7 @@ class Blade
 	 * @param  mixed  $value
 	 * @return Blade
 	 */ 
-	public function set() 
+	public function set($name, $value)
 	{
 		$this->_data[$name] = $value;
 		return $this;
