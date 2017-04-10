@@ -12,6 +12,15 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0",
-        "robmorgan/phinx": "^0.8.0"
+        "robmorgan/phinx": "^0.8.0",
+        "illuminate/database": "^5.4",
+        "illuminate/events": "^5.4"
+    },
+    "autoload": {
+        "classmap": [
+            "application/core",
+            "application/models",
+            "application/libraries"
+        ]
     }
 }
