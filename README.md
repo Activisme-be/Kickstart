@@ -2,6 +2,11 @@
 
 Starter template for our new systems. 
 
+## Security issues. 
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Activisme_be at informatica@activisme.be. 
+All security vulnerabilities will be promptly addressed.
+
 ## Versioning 
 
 For transparency into our release cycle and in striving to maintain backward compatibility, Kickstart is maintained under 
