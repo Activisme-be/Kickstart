@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Activisme-be/Kickstart/issues"
   },
-  "homepage": "https://github.com/Activisme-be/Kickstart#readme"
+  "homepage": "https://github.com/Activisme-be/Kickstart#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
