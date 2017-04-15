@@ -13,10 +13,12 @@ class UsersTable extends AbstractMigration
     public function up()
     {
         $table = $this->table('users', ['id' => true, 'primary_key' => 'id']);
+        $table->addColumn('ban_id', 'integer');
         $table->addColumn('name', 'string');
         $table->addColumn('username', 'string');
         $table->addColumn('email', 'string');
         $table->addColumn('password', 'string');
+        $table->addColumn('blocked', 'string');
 
         // Timestamps
         $table->addColumn('created_at', 'timestamp');

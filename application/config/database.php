@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
+	'username' => 'root',
 	'password' => '',
-	'database' => '',
+	'database' => 'activisme_be_authencation',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -96,14 +96,17 @@ $db['default'] = array(
 );
 
 /**
- * Start eloquent implementation. 
+ * Start eloquent implementation.
  */
-use Illuminate\Database\Capsule\Manager as Capsule; 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
 
-$capsule = new Capsule; 
+/**
+ * Create a new capsule
+ */
+$capsule = new Capsule;
 $capsule->addConnection([
-	'driver'    => 'mysql',
+    'driver'    => 'mysql',
     'host'      => $db['default']['hostname'],
     'database'  => $db['default']['database'],
     'username'  => $db['default']['username'],
@@ -111,39 +114,25 @@ $capsule->addConnection([
     'charset'   => $db['default']['char_set'],
     'collation' => $db['default']['dbcollat'],
     'prefix'    => $db['default']['dbprefix'],
-]);
-
-// Make this Capsule instance available globally via static methods... (optional)
-$capsule->setAsGlobal();
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-$capsule->bootEloquent();
-/*
- * Add Events to CodeIgniter adapted in our own way
- * LINK: http://jamieonsoftware.com/post/90299647695/using-eloquent-orm-inside-codeigniter-with-added
- */
+], 'default');
+$capsule->setAsGlobal();    // Make this Capsule instance available globally via static methods... (optional)
+$capsule->bootEloquent();   // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $events = new Dispatcher;
-$events->listen('illuminate.query', function($query, $bindings, $time, $name)
-{
+$events->listen('illuminate.query', function ($query, $bindings, $time, $name) {
     // Format binding data for sql insertion
-    foreach ($bindings as $i => $binding)
-    {   
-        if ($binding instanceof \DateTime)
-        {   
+    foreach ($bindings as $i => $binding) {
+        if ($binding instanceof \DateTime) {
             $bindings[$i] = $binding->format('\'Y-m-d H:i:s\'');
-        }
-        else if (is_string($binding))
-        {   
+        } elseif (is_string($binding)) {
             $bindings[$i] = "'$binding'";
-        }   
-    }       
+        }
+    }
     // Insert bindings into query
     $query = str_replace(array('%', '?'), array('%%', '%s'), $query);
     $query = vsprintf($query, $bindings);
-    
     // Add it into CodeIgniter
     $db =& get_instance()->db;
     $db->query_times[] = $time;
     $db->queries[] = $query;
 });
-
 $capsule->setEventDispatcher($events);

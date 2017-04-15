@@ -1,15 +1,26 @@
-<?php 
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Authencation extends MY_Controller 
+class Authencation extends MY_Controller
 {
+	public $user        = [];
+	public $permissions = [];
+	public $abilities   = [];
+
 	/**
 	 * Authencation constructor
 	 *
 	 * @return void
 	 */
-	public function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library(['session', 'blade', 'form_validation']);
+		$this->load->helper(['url']);
+		$this->load->model('authencate');
+
+		$this->user        = $this->session->userdata('user');
+		$this->permissions = $this->session->userdata('permissions');
+		$this->abilities   = $this->session->userdata('abilities');
 	}
 
 	/**
@@ -17,7 +28,7 @@ class Authencation extends MY_Controller
 	 *
 	 * @return array
 	 */
-	public function middleware() 
+	protected function middleware()
 	{
 		return [];
 	}
@@ -34,14 +45,14 @@ class Authencation extends MY_Controller
 	}
 
 	/**
-	 * Base method for validation the credentials. 
+	 * Base method for validation the credentials.
 	 *
 	 * @return Response|Blade view
 	 */
-	public function verify() 
+	public function verify()
 	{
-		$this->form_validation->set_rules();
-		$this->form_validation->set_rules();
+		$this->form_validation->set_rules('email', 'email', 'trim|required');
+        $this->form_validation->set_rules('password', 'password', 'trim|required|callback_check_database');
 
 		if ($this->form_validation->run() === false) { // Validation fails
 			$data['title'] = 'Inloggen';
@@ -61,13 +72,16 @@ class Authencation extends MY_Controller
 	 * @param  string $password The password for the user.
 	 * @return Blade view|Response
 	 */
-	public function check_database($password) 
+	public function check_database($password)
 	{
 		$input['email'] = $this->security->xss_clean($this->input->post('email'));
         $MySQL['user']  = Authencate::where('email', $input['email'])
             ->with(['permissions', 'abilities'])
             ->where('blocked', 'N')
             ->where('password', md5($password));
+
+			// var_dump(Authencate::all());
+			// die();
 
         if ((int) $MySQL['user']->count() === 1) {
             $authencation = []; // Empty userdata array .
@@ -116,18 +130,18 @@ class Authencation extends MY_Controller
 	 *
 	 * @return blade view
 	 */
-	public function register() 
+	public function register()
 	{
 		$data['title'] = 'Registreer';
 		$this->blade->render('auth/register', $data);
 	}
 
 	/**
-	 * Store the new user in the system. 
+	 * Store the new user in the system.
 	 *
 	 * @return Response|Blade view.
 	 */
-	public function store() 
+	public function store()
 	{
 		$this->form_validation->set_rules('name', 'Naam', 'trim|required');
 		$this->form_validation->set_rules('username', 'Gebruikersnaam', 'trim|required');
@@ -143,7 +157,7 @@ class Authencation extends MY_Controller
 			return $this->blade->render('auth/register', $data);
 		}
 
-		// No validation errors found so move on with the logic. 
+		// No validation errors found so move on with the logic.
 		$input['name'] 		= $this->input->post('name');
 		$input['username']	= $this->input->post('username');
 		$input['email']		= $this->input->post('email');
