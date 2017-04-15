@@ -80,7 +80,7 @@ class Authencation extends MY_Controller
             ->where('blocked', 'N')
             ->where('password', md5($password));
 
-			// var_dump(Authencate::all());
+			// var_dump($MySQL['user']->get());
 			// die();
 
         if ((int) $MySQL['user']->count() === 1) {
@@ -109,6 +109,8 @@ class Authencation extends MY_Controller
 
                     return true;
                 } else {
+					$this->form_validation->set_message('check_database', 'U hebt geen rechten om hier in te loggen.');
+
                     $this->session->set_flashdata('class', 'alert alert-danger');
                     $this->session->set_flashdata('message', 'U hebt geen rechten om hier in te loggen');
 
@@ -144,9 +146,10 @@ class Authencation extends MY_Controller
 	public function store()
 	{
 		$this->form_validation->set_rules('name', 'Naam', 'trim|required');
-		$this->form_validation->set_rules('username', 'Gebruikersnaam', 'trim|required');
-		$this->form_validation->set_rules('email', 'Email adres', 'trim|required');
-		$this->form_validation->set_rules('password', 'Wachtwoord', 'trim|required');
+		$this->form_validation->set_rules('username', 'Gebruikersnaam', 'trim|required|is_unique[users.username]');
+		$this->form_validation->set_rules('email', 'Email adres', 'trim|required|is_unique[users.email]');
+		$this->form_validation->set_rules('password', 'Wachtwoord', 'trim|required|matches[password_confirmation]');
+		$this->form_validation->set_rules('password_confirmation', 'bevestiging', 'trim|required');
 
 		if ($this->form_validation->run() === false) { // Form validation fails.
 			$data['title'] = 'Registreren';
@@ -162,6 +165,8 @@ class Authencation extends MY_Controller
 		$input['username']	= $this->input->post('username');
 		$input['email']		= $this->input->post('email');
 		$input['password']  = md5($this->input->post('password'));
+		$input['ban_id']    = '0';
+		$input['blocked']   = 'N';
 
 		if (Authencate::create($this->security->xss_clean($input))) {
 			$this->session->set_flashdata('class', 'alert alert-success');
@@ -169,5 +174,22 @@ class Authencation extends MY_Controller
 		}
 
 		return redirect($_SERVER['HTTP_REFERER']);
+	}
+
+	/**
+	 * Log the user out off the system.
+	 *
+	 * @return Redirect
+	 */
+	public function logout()
+	{
+		$data = $this->session;
+
+		if ($data->unset_userdata('user') && $data->unset_userdata('permissions') && $data->unset_userdata('abilities')) {
+			$data->set_flashdata('class', 'alert alert-success');
+			$data->set_flashdata('message', 'U bent nu uitgelogd.');
+		}
+
+		return redirect(base_url());
 	}
 }

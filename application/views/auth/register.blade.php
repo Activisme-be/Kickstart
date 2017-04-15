@@ -12,9 +12,16 @@
             <nav>
                 <ul>
                     <li><a href="{{ base_url() }}">Home</a></li>
-                    <li><a href="{{ base_url('authencation/login') }}">Log-in</a></li>
-                    <li><a href="{{ base_url('authencation/register') }}">Register</a></li>
                     <li><a href="mailto:info@activisme.be">Contact</a></li>
+
+                    @if ($this->user)
+                        <li><a href="{{ base_url('backend') }}">Back-end</a></li>
+                        <li><a href="{{ base_url('authencation/logout') }}">Uitloggen</a></li>
+                    @else
+                        <li><a href="{{ base_url('authencation/login') }}">Log-in</a></li>
+                        <li><a href="{{ base_url('authencation/register') }}">Register</a></li>
+
+                    @endif
                 </ul>
             </nav>
             <section>
@@ -23,27 +30,31 @@
             </section>
         </header>
         <main>
-            <form>
+
+            <form method="POST" action="{{ base_url('authencation/store') }}">
                 <h1>Registreer</h1>
+
+                {{ validation_errors() }}
+
                 <section>
                     <label for="naam">Naam:</label>
-                    <input type="text" id="naam" placeholder="Naam"/>
+                    <input type="text" name="name" id="naam" placeholder="Naam"/>
                 </section>
                 <section>
                     <label for="gebruikersnaam">Gebruikersnaam:</label>
-                    <input type="text" id="gebruikersnaam" placeholder="Gebruikersnaam"/>
+                    <input type="text" name="username" id="gebruikersnaam" placeholder="Gebruikersnaam"/>
                 </section>
                 <section>
                     <label for="email">E-mail:</label>
-                    <input type="text" id="email" placeholder="E-mail"/>
+                    <input type="text" name="email" id="email" placeholder="E-mail"/>
                 </section>
                 <section>
                     <label for="paswoord">Paswoord:</label>
-                    <input type="text" id="paswoord" placeholder="Paswoord"/>
+                    <input type="text" id="paswoord" name="password" placeholder="Paswoord"/>
                 </section>
                 <section>
                     <label for="bevestigPaswoord">Bevestig Paswoord:</label>
-                    <input type="text" id="bevestigPaswoord" placeholder="Bevestig Paswoord"/>
+                    <input type="text" name="password_confirmation"i d="bevestigPaswoord" placeholder="Bevestig Paswoord"/>
                 </section>
                 <section>
                     <label for="submit">Registreer</label>
