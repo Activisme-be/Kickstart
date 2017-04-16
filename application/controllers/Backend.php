@@ -1,19 +1,19 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); 
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Backend extends MY_Controller 
+class Backend extends MY_Controller
 {
 	public $user        = []; /** */
 	public $permissions = []; /** */
-	public $abilities   = []; /** */ 
+	public $abilities   = []; /** */
 	/**
 	 * Backend Constructor
 	 *
 	 * @return void
 	 */
-	public function __construct() 
+	public function __construct()
 	{
-		parent::__construct(); 
-		$this->load->library(['blade', 'form_validation', 'session']); 
+		parent::__construct();
+		$this->load->library(['blade', 'form_validation', 'session']);
 		$this->load->helper(['url']);
 
 		$this->user         = $this->session->userdata('user');
@@ -23,12 +23,12 @@ class Backend extends MY_Controller
 
 	/**
 	 * Backend controller middleware.
-	 * 
+	 *
 	 * @return array
 	 */
-	protected function middleware() 
+	protected function middleware()
 	{
-		return ['auth']; // TODO: Register the middleware.
+		return ['auth'];
 	}
 
 	/**
@@ -36,9 +36,12 @@ class Backend extends MY_Controller
 	 *
 	 * @return Blade view.
 	 */
-	public function index() 
-	{ 
+	public function index()
+	{
 		$data['title'] = 'Backend';
+		$data['links'] = Actions::with(['types'])->get();
+		$data['types'] = Types::all();
+
 		return $this->blade->render('backend', $data);
 	}
 }

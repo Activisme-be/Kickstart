@@ -1,6 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); 
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users extends MY_Controller 
+class Users extends MY_Controller
 {
 	public $user        = []; /** */
 	public $abilities   = []; /** */
@@ -11,20 +11,20 @@ class Users extends MY_Controller
 	 *
 	 * @return void
 	 */
-	public function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(['session', 'form_validation', 'session']);
+		$this->load->library(['blade', 'form_validation', 'session']);
 		$this->load->helper(['url']);
 
-		$this->user        = $this->session->userdata('user'); 
+		$this->user        = $this->session->userdata('user');
 		$this->permissions = $this->session->userdata('permissions');
 		$this->abilities   = $this->session->userdata('abilities');
 
 	}
 
 	/**
-	 * Get the backend users overview. 
+	 * Get the backend users overview.
 	 *
 	 * @return blade view.
 	 */
@@ -69,18 +69,18 @@ class Users extends MY_Controller
 	}
 
 	/**
-	 * Show a user. 
+	 * Show a user.
 	 *
 	 * @return blade response.
 	 */
-	public function show() 
+	public function show()
 	{
 		$userId       = $this->security->xss_clean($this->uri->segment(3));
 		$data['user'] = Authencate::find($userId);
 
 		if ((int) count($data['user']) === 1) {
-			$data['title'] = $data['user']->name '('. $data['user']->username .')';
-			return $this->blade->render('users/show', $data)
+			$data['title'] = $data['user']->name . '('. $data['user']->username .')';
+			return $this->blade->render('users/show', $data);
 		}
 
 		return $this->blade->render('errors/html/404');
@@ -90,7 +90,7 @@ class Users extends MY_Controller
 	 *
 	 *
 	 */
-	public function edit() 
+	public function edit()
 	{
 		$data['title'] = 'Wijzig account.';
 		$data['user']  = Authencate::find($this->user['id']);
@@ -105,16 +105,16 @@ class Users extends MY_Controller
 	public function updateAccount()
 	{
 		$this->form_validation->set_rules();
-		$this->form_validation->set_rules(); 
+		$this->form_validation->set_rules();
 		$this->form_validation->set_rules();
 
 		if ($this->form_validation->run() === false) {
 
 		}
-		
-		// No validation errors so move on out backend logic. 
+
+		// No validation errors so move on out backend logic.
 		$input['name']     = $this->input->post('name');
-		$input['email']    = $this->input->post('email'); 
+		$input['email']    = $this->input->post('email');
 		$input['username'] = $this->input->post('password');
 
 		if (Authencate::find($this->user['id'])->update($this->security->xss_clean($input))) {
@@ -127,22 +127,22 @@ class Users extends MY_Controller
 	 *
 	 * @return Blade view|Redirect
 	 */
-	public function updateSecurity() 
+	public function updateSecurity()
 	{
 		$this->form_validation->set_rules();
 
-		if ($this->form_validation->run() === false) { 
+		if ($this->form_validation->run() === false) {
 			$data['user']  = Authencate::find($this->user['id']);
-			$data['title'] = $this->user['name'] . '(' . $this->user['username'] . ')':
+			$data['title'] = $this->user['name'] . '(' . $this->user['username'] . ')';
 
 			return $this->blade->render('auth/profile', $data);
 		}
 
-		// No validation errors Move on with our logic. 
+		// No validation errors Move on with our logic.
 		$input['password'] = $this->input->post('password');
 
 		if (Authencate::find($this->user['id'])->update($this->security->xss_clean($input))) {
-			$this->session->set_flashdata('class', 'alert alert-success'); 
+			$this->session->set_flashdata('class', 'alert alert-success');
 			$this->session->set_flashdata('message', 'Het wachtwoord van je account is gewijzigd.');
 		}
 
@@ -150,16 +150,16 @@ class Users extends MY_Controller
 	}
 
 	/**
-	 * Unblock a user in the system. 
+	 * Unblock a user in the system.
 	 *
 	 * @return Redirect
 	 */
-	public function unblock() 
+	public function unblock()
 	{
 		$userId = $this->seucrity->xss_clean($this->uri->segment(3));
 
-		if (Authencate::find($userId)->update(['ban_id' => 0, ''])) { // User is unblocked. 
-			$this->session->set_flashdata('class', 'alert alert-success'); 
+		if (Authencate::find($userId)->update(['ban_id' => 0, ''])) { // User is unblocked.
+			$this->session->set_flashdata('class', 'alert alert-success');
 			$this->session->set_flashdata('message', 'De gebruiker is actief.');
 		}
 
@@ -171,7 +171,7 @@ class Users extends MY_Controller
 	 *
 	 * @return Redirect
 	 */
-	public function delete() 
+	public function delete()
 	{
 		$user = Authencate::find($this->security->xss_clean($this->uri->segment(3)));
 

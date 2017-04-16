@@ -9,5 +9,5 @@ class Permissions extends Model
 
     protected $table = 'permissions';
 
-    protected $fillable = [];
+    protected $fillable = ['name', 'description'];
 }
