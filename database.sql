@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.14-MariaDB, for osx10.11 (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.54, for Win64 (AMD64)
 --
--- Host: localhost    Database: activisme_be_authencation
+-- Host: localhost    Database: activisme_ind
 -- ------------------------------------------------------
--- Server version	5.6.27
+-- Server version	5.5.5-10.1.20-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -90,7 +90,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('0r21kusdiop3vva0lb3b3km7rb0f31eb','::1',1492212237,'__ci_last_regenerate|i:1492211941;'),('v2js1tqcqp6f318h4acjbukk8f9o7ov7','::1',1492285738,'__ci_last_regenerate|i:1492285505;class|s:18:\"alert alert-danger\";__ci_vars|a:2:{s:5:\"class\";s:3:\"new\";s:7:\"message\";s:3:\"new\";}message|s:140:\"De gebruikersnaam en het wachtwoord die je hebt ingevoerd komen niet overeen met ons archief. Controlleer de gegevens en probeer het opniew.\";'),('66v8e4629th6km3eb30fjoapaipb0t72','::1',1492304449,'__ci_last_regenerate|i:1492304357;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}'),('ha7lme9gaktl7com9j26bjm48jumr77i','::1',1492345203,'__ci_last_regenerate|i:1492345196;');
+INSERT INTO `ci_sessions` VALUES ('0r21kusdiop3vva0lb3b3km7rb0f31eb','::1',1492212237,'__ci_last_regenerate|i:1492211941;'),('v2js1tqcqp6f318h4acjbukk8f9o7ov7','::1',1492285738,'__ci_last_regenerate|i:1492285505;class|s:18:\"alert alert-danger\";__ci_vars|a:2:{s:5:\"class\";s:3:\"new\";s:7:\"message\";s:3:\"new\";}message|s:140:\"De gebruikersnaam en het wachtwoord die je hebt ingevoerd komen niet overeen met ons archief. Controlleer de gegevens en probeer het opniew.\";'),('66v8e4629th6km3eb30fjoapaipb0t72','::1',1492304449,'__ci_last_regenerate|i:1492304357;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}'),('ha7lme9gaktl7com9j26bjm48jumr77i','::1',1492345203,'__ci_last_regenerate|i:1492345196;'),('nd9c9j2nj5gkohc9efbv9o76ri5ck81n','::1',1492381553,'__ci_last_regenerate|i:1492381535;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,6 +274,33 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (2,0,'Topairy','Tim Joosten','N','3926f3e9e85eeaf749e603cc4b55d486','Topairy@gmail.com',NULL,NULL,NULL),(4,0,'test@gmail.com','test','N','b4b8daf4b8ea9d39568719e1e320076f','test@gmail.com','2017-04-15 22:11:17','2017-04-15 22:11:17',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `volunteers`
+--
+
+DROP TABLE IF EXISTS `volunteers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `volunteers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `volunteers`
+--
+
+LOCK TABLES `volunteers` WRITE;
+/*!40000 ALTER TABLE `volunteers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `volunteers` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -284,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-16 18:31:26
+-- Dump completed on 2017-04-17  0:29:53

@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{ base_url('backend') }}">Menu items</a></li>
             <li><a href="{{ base_url('users') }}">Gebruikers</a></li>
-            <li><a href="#">Vrijwilligers</a></li>
+            <li><a href="{{ base_url('volunteer/index') }}">Vrijwilligers</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

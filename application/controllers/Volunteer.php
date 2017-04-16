@@ -36,10 +36,15 @@ class Volunteer extends MY_controller
     {
         $data['title']      = 'Index';
         $data['volunteers'] = Volunteers::all();
-        
+
         return $this->blade->render('volunteers/index', $data);
     }
 
+    /**
+     * New volunteer index.
+     *
+     * @return Blade view
+     */
     public function new()
     {
         $data['title'] = 'Word vrijwilliger.';
@@ -53,8 +58,8 @@ class Volunteer extends MY_controller
      */
     public function store()
     {
-        $this->form_validation->set_rules();
-        $this->form_validation->set_rules();
+        $this->form_validation->set_rules('name', 'Naam', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email adres', 'rim|required');
 
         if ($this->form_validation->run() === false) { // form validation fails.
             $data['title']      = 'Vrijwilligers';
@@ -64,7 +69,7 @@ class Volunteer extends MY_controller
         // No validation errors found. Move on with the logic.
         $input['name']        = $this->input->post('name');
         $input['email']       = $this->input->post('email');
-        $input['information'] = $this->input->post('information');
+        // $input['information'] = $this->input->post('information');
 
         if (Volunteers::create($this->security->xss_clean($input))) { // Record has been inserted.
             $this->session->set_flashdata('class', 'alert alert-success');
