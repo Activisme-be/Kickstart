@@ -1,8 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
+/**
+ * @todo docblock
+ */
 class Links extends MY_Controller
 {
-    public $user        = []; /** */
+    public $user        = []; /** @var $user */
     public $permissions = []; /** */
     public $abilities   = []; /** */
 
