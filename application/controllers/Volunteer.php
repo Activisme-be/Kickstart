@@ -35,7 +35,8 @@ class Volunteer extends MY_controller
     public function index()
     {
         $data['title']      = 'Index';
-        $data['volunteers'] = Volunteers::all();
+        $data['volunteers'] = Vrijwilligers::all();
+        // $data['volunteers'] = $this->db->get('volunteers')->result_array();
 
         return $this->blade->render('volunteers/index', $data);
     }
@@ -59,7 +60,7 @@ class Volunteer extends MY_controller
     public function store()
     {
         $this->form_validation->set_rules('name', 'Naam', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email adres', 'rim|required');
+        $this->form_validation->set_rules('email', 'Email adres', 'trim|required');
 
         if ($this->form_validation->run() === false) { // form validation fails.
             $data['title']      = 'Vrijwilligers';
@@ -71,12 +72,12 @@ class Volunteer extends MY_controller
         $input['email']       = $this->input->post('email');
         // $input['information'] = $this->input->post('information');
 
-        if (Volunteers::create($this->security->xss_clean($input))) { // Record has been inserted.
+        if (Vrijwilligers::create($this->security->xss_clean($input))) { // Record has been inserted.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'Wij danken je voor je intresse.');
         }
 
-        return redirect(back());
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -87,7 +88,7 @@ class Volunteer extends MY_controller
     public function delete()
     {
         $paramId       = $this->uri->segment(3);
-        $volunteer     = Volunteers::find($this->security->xss_clean($paramId));
+        $volunteer     = Vrijwilligers::find($this->security->xss_clean($paramId));
         $sessionOutput = $this->session;
 
         if ((int) count($volunteer) === 0) { // Volunteer is not found.

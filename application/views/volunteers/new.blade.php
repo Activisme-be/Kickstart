@@ -37,7 +37,7 @@
 
             <section>
                 <label for="name">Naam:</label>
-                <input type="text" name="Naam" placeholder="Uw naam">
+                <input type="text" id="Naam" name="name" placeholder="Uw naam">
             </section>
             <section>
                 <label for="email">E-mail:</label>

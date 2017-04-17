@@ -3,11 +3,9 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Volunteers extends Model
+class Vrijwilligers extends Model
 {
-    use SoftDeletes;
-
-    protected $table = 'volunteers';
+	use SoftDeletes;
 
     protected $fillable = ['name', 'email'];
 }

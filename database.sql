@@ -90,7 +90,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('0r21kusdiop3vva0lb3b3km7rb0f31eb','::1',1492212237,'__ci_last_regenerate|i:1492211941;'),('v2js1tqcqp6f318h4acjbukk8f9o7ov7','::1',1492285738,'__ci_last_regenerate|i:1492285505;class|s:18:\"alert alert-danger\";__ci_vars|a:2:{s:5:\"class\";s:3:\"new\";s:7:\"message\";s:3:\"new\";}message|s:140:\"De gebruikersnaam en het wachtwoord die je hebt ingevoerd komen niet overeen met ons archief. Controlleer de gegevens en probeer het opniew.\";'),('66v8e4629th6km3eb30fjoapaipb0t72','::1',1492304449,'__ci_last_regenerate|i:1492304357;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}'),('ha7lme9gaktl7com9j26bjm48jumr77i','::1',1492345203,'__ci_last_regenerate|i:1492345196;'),('nd9c9j2nj5gkohc9efbv9o76ri5ck81n','::1',1492381553,'__ci_last_regenerate|i:1492381535;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}');
+INSERT INTO `ci_sessions` VALUES ('0r21kusdiop3vva0lb3b3km7rb0f31eb','::1',1492212237,'__ci_last_regenerate|i:1492211941;'),('v2js1tqcqp6f318h4acjbukk8f9o7ov7','::1',1492285738,'__ci_last_regenerate|i:1492285505;class|s:18:\"alert alert-danger\";__ci_vars|a:2:{s:5:\"class\";s:3:\"new\";s:7:\"message\";s:3:\"new\";}message|s:140:\"De gebruikersnaam en het wachtwoord die je hebt ingevoerd komen niet overeen met ons archief. Controlleer de gegevens en probeer het opniew.\";'),('66v8e4629th6km3eb30fjoapaipb0t72','::1',1492304449,'__ci_last_regenerate|i:1492304357;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}'),('ha7lme9gaktl7com9j26bjm48jumr77i','::1',1492345203,'__ci_last_regenerate|i:1492345196;'),('nd9c9j2nj5gkohc9efbv9o76ri5ck81n','::1',1492381553,'__ci_last_regenerate|i:1492381535;permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}'),('fvmvu4jf9vl2e93t0uef9ep89udgeoal','::1',1492468860,'__ci_last_regenerate|i:1492468629;user|a:4:{s:2:\"id\";i:4;s:4:\"name\";s:4:\"test\";s:5:\"email\";s:14:\"test@gmail.com\";s:8:\"username\";s:14:\"test@gmail.com\";}permissions|a:1:{i:0;s:5:\"Admin\";}abilities|a:0:{}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,30 +276,31 @@ INSERT INTO `users` VALUES (2,0,'Topairy','Tim Joosten','N','3926f3e9e85eeaf749e
 UNLOCK TABLES;
 
 --
--- Table structure for table `volunteers`
+-- Table structure for table `vrijwilligers`
 --
 
-DROP TABLE IF EXISTS `volunteers`;
+DROP TABLE IF EXISTS `vrijwilligers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `volunteers` (
+CREATE TABLE `vrijwilligers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `volunteers`
+-- Dumping data for table `vrijwilligers`
 --
 
-LOCK TABLES `volunteers` WRITE;
-/*!40000 ALTER TABLE `volunteers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `volunteers` ENABLE KEYS */;
+LOCK TABLES `vrijwilligers` WRITE;
+/*!40000 ALTER TABLE `vrijwilligers` DISABLE KEYS */;
+INSERT INTO `vrijwilligers` VALUES (1,'test','topairy@gmail.com','2017-04-17 22:57:43','2017-04-17 22:57:43','0000-00-00 00:00:00'),(2,'krepo','krepo@gmail.com','2017-04-17 23:07:35','2017-04-17 23:07:35','0000-00-00 00:00:00'),(3,'qsdfqdsf','qfsfq','2017-04-17 23:13:07','2017-04-17 23:13:07','0000-00-00 00:00:00'),(4,'fdsg','sgsdgsd','2017-04-17 23:14:25','2017-04-17 23:14:25','0000-00-00 00:00:00'),(5,'root','test@gmail.com','2017-04-17 23:40:57','2017-04-17 23:40:57',NULL);
+/*!40000 ALTER TABLE `vrijwilligers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -311,4 +312,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  0:29:53
+-- Dump completed on 2017-04-18  0:41:48
