@@ -10,9 +10,7 @@
 <body>
 <header>
     <nav>
-        <ul>
-			@include('layouts/includes/front-end-navigation')
-        </ul>
+		@include('layouts/includes/front-end-navigation')
     </nav>
     <section>
         <h1>CROWDFUND</h1>

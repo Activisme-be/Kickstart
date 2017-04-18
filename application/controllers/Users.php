@@ -23,6 +23,11 @@ class Users extends MY_Controller
 
 	}
 
+	protected function middleware()
+	{
+		return [];
+	}
+
 	/**
 	 * Get the backend users overview.
 	 *
@@ -110,57 +115,6 @@ class Users extends MY_Controller
 		$data['user']  = Authencate::find($this->user['id']);
 
 		return $this->blade->render('users/edit', $data);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	public function updateAccount()
-	{
-		$this->form_validation->set_rules('', '', '');
-		$this->form_validation->set_rules('', '', '');
-		$this->form_validation->set_rules('', '', '');
-
-		if ($this->form_validation->run() === false) {
-
-		}
-
-		// No validation errors so move on out backend logic.
-		$input['name']     = $this->input->post('name');
-		$input['email']    = $this->input->post('email');
-		$input['username'] = $this->input->post('password');
-
-		if (Authencate::find($this->user['id'])->update($this->security->xss_clean($input))) {
-			$this->session->set_flashdata('class', 'alert alert-success');
-			$this->session->set_flashdata('message', 'Uw account gegevens zijn aangepast.');
-		}
-	}
-
-	/**
-	 *
-	 * @return Blade view|Redirect
-	 */
-	public function updateSecurity()
-	{
-		$this->form_validation->set_rules('', '', '');
-
-		if ($this->form_validation->run() === false) {
-			$data['user']  = Authencate::find($this->user['id']);
-			$data['title'] = $this->user['name'] . '(' . $this->user['username'] . ')';
-
-			return $this->blade->render('auth/profile', $data);
-		}
-
-		// No validation errors Move on with our logic.
-		$input['password'] = $this->input->post('password');
-
-		if (Authencate::find($this->user['id'])->update($this->security->xss_clean($input))) {
-			$this->session->set_flashdata('class', 'alert alert-success');
-			$this->session->set_flashdata('message', 'Het wachtwoord van je account is gewijzigd.');
-		}
-
-		return redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	/**

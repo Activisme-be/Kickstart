@@ -37,7 +37,7 @@
         		</div>
         		<div id="navbar" class="collapse navbar-collapse">
           			<ul class="nav navbar-nav">
-            			<li class="active"><a href="{{ base_url('backend') }}">Menu items</a></li>
+            			<li><a href="{{ base_url('backend') }}">Menu items</a></li>
             			<li><a href="{{ base_url('users') }}">Gebruikers</a></li>
             			<li><a href="{{ base_url('volunteer/index') }}">Vrijwilligers</a></li>
           			</ul>
