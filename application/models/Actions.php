@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class 
+ * Class Actions
  */
 class Actions extends Model
 {
@@ -24,6 +24,11 @@ class Actions extends Model
      */
     protected $fillable = ['author_id', 'type_id', 'link', 'name'];
 
+	/**
+	 * Type relationship.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
     public function types()
     {
         return $this->belongsTo('Types', 'type_id');
