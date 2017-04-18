@@ -61,8 +61,8 @@ class Users extends MY_Controller
 		$ban    = Authencate::find($userId)->update(['blocked' => 'N', 'ban_id' => $reason->id]);
 
 		if ($ban && $reason) { // The user has been blocked.
-			$this->session->set_flashdata();
-			$this->session->set_flashdata();
+			$this->session->set_flashdata('class', '');
+			$this->session->set_flashdata('message', '');
 		}
 
 		return redirect($_SERVER['HTTP_REFERER']);
@@ -104,9 +104,9 @@ class Users extends MY_Controller
 	 */
 	public function updateAccount()
 	{
-		$this->form_validation->set_rules();
-		$this->form_validation->set_rules();
-		$this->form_validation->set_rules();
+		$this->form_validation->set_rules('', '', '');
+		$this->form_validation->set_rules('', '', '');
+		$this->form_validation->set_rules('', '', '');
 
 		if ($this->form_validation->run() === false) {
 
@@ -129,7 +129,7 @@ class Users extends MY_Controller
 	 */
 	public function updateSecurity()
 	{
-		$this->form_validation->set_rules();
+		$this->form_validation->set_rules('', '', '');
 
 		if ($this->form_validation->run() === false) {
 			$data['user']  = Authencate::find($this->user['id']);
@@ -156,7 +156,7 @@ class Users extends MY_Controller
 	 */
 	public function unblock()
 	{
-		$userId = $this->seucrity->xss_clean($this->uri->segment(3));
+		$userId = $this->security->xss_clean($this->uri->segment(3));
 
 		if (Authencate::find($userId)->update(['ban_id' => 0, ''])) { // User is unblocked.
 			$this->session->set_flashdata('class', 'alert alert-success');
