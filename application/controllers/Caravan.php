@@ -1,13 +1,13 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Crowdfund extends MY_Controller 
+class Caravan extends MY_Controller
 {
 	public $user        = [];
 	public $abilities   = [];
 	public $permissions = [];
 	
 	/**
-	 * Crowdfund constructor
+	 * Caravan constructor
 	 *
 	 * @return void
 	 */
@@ -29,7 +29,7 @@ class Crowdfund extends MY_Controller
 	 */
 	public function index() 
 	{
-		$data['title'] = 'Crowdfund';
-		return $this->blade->render('crowdfund', $data);
+		$data['title'] = 'Caravan';
+		return $this->blade->render('Caravan', $data);
 	}
 }
