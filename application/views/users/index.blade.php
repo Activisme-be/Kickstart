@@ -4,9 +4,8 @@
 	<div class="row row-padding">
 		<div class="col-sm-12"> {{-- Menu --}}
 			<span class="pull-left">
-				<form class="form-inline" action="">
-					{{-- TODO: Implement the search backend logic. --}}
-					<input placeholder="De naam of email adres" class="form-control" type="text" name="term">
+				<form class="form-inline" action="{{ base_url('users/search') }}" method="GET">
+					<input placeholder="Naam of gebruikersnaam" class="form-control" type="text" name="term">
 					<button type="submit" class="btn btn-danger">Zoek</button>
 				</form>
 			</span>
@@ -23,7 +22,15 @@
 				<div class="panel-body"> {{-- Data --}}
 					@if ((int) count($users) === 0)
 						<div class="alert alert-info" role="alert">
-							Er zijn geen gebruikers gevonden in het systeem.
+							<p @if (strpos(current_url(), 'search') !== false) style="margin-bottom: 10px;" @endif>
+								Er zijn geen gebruikers gevonden in het systeem.
+							</p>
+
+							@if (strpos(current_url(), 'search') !== false)
+								<p>
+									<a href="{{ base_url('users/index') }}" class="btn btn-sm btn-info">Ga terug</a>
+								</p>
+							@endif
 						</div>
 					@else
 						<div class="table-responsive">

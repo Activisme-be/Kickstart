@@ -52,6 +52,28 @@ class Users extends MY_Controller
 	}
 
 	/**
+	 * Search for a specific user in the system.
+	 *
+	 * @return mixed
+	 */
+	public function search()
+	{
+		$term = $this->security->xss_clean($this->input->get('term'));
+
+		$data['title']       = 'Zoek resultaten:' . $term;
+		$data['permissions'] = Permissions::all();
+		$data['abilities']   = Abilities::all();
+
+		// Search query
+		$data['users'] = Authencate::where('name', 'LIKE', "$term")
+			->orWhere('name', 'like', "$term")
+			->orWhere('email', 'like', "$term")
+			->get();
+
+		return $this->blade->render('users/index', $data);
+	}
+
+	/**
 	 * Get the suer information by the id.
 	 *
 	 * @return JSON response
