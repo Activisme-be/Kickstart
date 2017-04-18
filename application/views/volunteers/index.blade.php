@@ -46,9 +46,13 @@
                 <div class="panel-heading">Menu:</div>
 
                 <div class="list-group">
-                    <a href="" class="list-group-item">Vrijwilliger toevoegen</a>
+                    <a href="#" data-toggle="modal" data-target="#new-volunteer" class="list-group-item">Vrijwilliger toevoegen</a>
                 </div>
             </div>
         </div> {{-- /Sidebar --}}
     </div>
+
+	{{-- Modal includes --}}
+		@include('volunteers/includes/create-volunteer')
+	{{-- /Modal includes --}}
 @endsection
