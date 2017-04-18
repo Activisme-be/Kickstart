@@ -35,17 +35,27 @@
 
             {{ validation_errors() }}
 
-            <section>
+            <section style="margin-bottom: 5px;">
                 <label for="name">Naam:</label>
-                <input type="text" id="Naam" name="name" placeholder="Uw naam">
+                <input style="width: 196px;" type="text" id="Naam" name="name" placeholder="Uw naam">
             </section>
-            <section>
+            <section style="margin-bottom: 5px;">
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" placeholder="E-mail"/>
+                <input style="width: 196px;" type="text" id="email" name="email" placeholder="E-mail"/>
             </section>
+			<section style="margin-bottom: 5px;">
+				<label for="regio">Woonplaats:</label>
+				<select style="width: 200px;" name="city_id" id="regio">
+					<option value=""> -- Stad --</option>
+
+					@foreach ($cities as $city)
+						<option value="{{ $city->id }}">{{ $city->postal_code }} - {{ $city->city_name }}</option>
+					@endforeach
+				</select>
+			</section>
             <section>
                 <label for="submit"></label>
-                <input type="submit" id="submit" value="Registreer"/>
+                <input style="width: 200px;" type="submit" id="submit" value="Registreer"/>
             </section>
         </form>
     </main>

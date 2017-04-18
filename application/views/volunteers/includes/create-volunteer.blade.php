@@ -27,6 +27,21 @@
 							<input type="text" name="email" class="form-control" placeholder="Email">
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-3">
+							Regio: <span class="text-danger">*</span>
+						</label>
+						<div class="col-sm-9">
+							<select name="city_id" class="form-control">
+								<option value="">-- Selecteer de stad -- </option>
+
+								@foreach ($cities as $city)
+									<option value="{{ $city->id }}">{{ $city->postal_code }} - {{ $city->city_name }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 				</form>
 			</div>
 

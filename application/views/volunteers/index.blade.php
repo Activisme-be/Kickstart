@@ -15,8 +15,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Naam:</th>
+										<th>Naam:</th>
                                         <th>Email:</th>
+										<th>Regio:</th>
                                         <th>Opties:</th>
                                     </tr>
                                 </thead>
@@ -26,6 +27,7 @@
                                             <td>#{{ $volunteer['id'] }}</td>
                                             <td>{{ $volunteer['name'] }}</td>
                                             <td><a href="mailto:{{ $volunteer['email'] }}">{{ $volunteer['email'] }}</a></td>
+											<td>{{ $volunteer->cities->province->province_name_nl }} | {{ $volunteer->cities->postal_code }} {{ $volunteer->cities->city_name }}</td>
 
                                             <td> {{-- Options --}}
                                                 <a href="#" class="label label-warning">Wijzig</a>

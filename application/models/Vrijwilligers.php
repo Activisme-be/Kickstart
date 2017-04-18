@@ -15,5 +15,15 @@ class Vrijwilligers extends Model
 	 *
 	 * @var array
 	 */
-    protected $fillable = ['name', 'email'];
+    protected $fillable = ['name', 'email', 'city_id'];
+
+	/**
+	 * City relation for the volunteer.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+    public function cities()
+	{
+		return $this->belongsTo(City::class, 'city_id');
+	}
 }

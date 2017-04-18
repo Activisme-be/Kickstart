@@ -38,8 +38,8 @@ class Volunteer extends MY_controller
     public function index()
     {
         $data['title']      = 'Index';
-        $data['volunteers'] = Vrijwilligers::all();
-        // $data['volunteers'] = $this->db->get('volunteers')->result_array();
+        $data['volunteers'] = Vrijwilligers::with(['cities.province'])->get();
+        $data['cities']     = City::all();
 
         return $this->blade->render('volunteers/index', $data);
     }
@@ -51,7 +51,9 @@ class Volunteer extends MY_controller
      */
     public function new()
     {
-        $data['title'] = 'Word vrijwilliger.';
+        $data['title']  = 'Word vrijwilliger.';
+        $data['cities'] = City::all();
+
         return $this->blade->render('volunteers/new', $data);
     }
 
@@ -64,6 +66,7 @@ class Volunteer extends MY_controller
     {
         $this->form_validation->set_rules('name', 'Naam', 'trim|required');
         $this->form_validation->set_rules('email', 'Email adres', 'trim|required');
+        $this->form_validation->set_rules('city_id', 'Stad', 'trim|required');
 
         if ($this->form_validation->run() === false) { // form validation fails.
             $data['title']      = 'Vrijwilligers';
@@ -73,6 +76,7 @@ class Volunteer extends MY_controller
         // No validation errors found. Move on with the logic.
         $input['name']        = $this->input->post('name');
         $input['email']       = $this->input->post('email');
+        $input['city_id']     = $this->input->post('city_id');
         // $input['information'] = $this->input->post('information');
 
         if (Vrijwilligers::create($this->security->xss_clean($input))) { // Record has been inserted.
