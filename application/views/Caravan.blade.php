@@ -53,8 +53,9 @@
     </section>
     <section class="sponsors">
         <h1>Sponsors</h1>
-        <!-- grouping the images, Readers don't have to say images are grouped, important it tells what's on the image. -->
-        <div>
+        {{-- grouping the images, Readers don't have to say images are grouped, important it tells what's on the image. --}}
+        <div>µ
+			<img src="{{ base_url('assets/images/Vrede.jpg') }}" class="block-vrede" alt="Vrede.be">
             <img src="{{ base_url('assets/images/AkzoNobelTormorrowsAnswersToday.jpg') }}" alt="AkzoNobel Tormorrow's Answers Today"/>
             <img src="{{ base_url('assets/images/GarageTeirlynckWaregem.jpg') }}" alt="Garage Teirlynck Waregem"/>
         </div>
