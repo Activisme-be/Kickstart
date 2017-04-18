@@ -5,13 +5,14 @@
 		<div class="col-sm-12"> {{-- Menu --}}
 			<span class="pull-left">
 				<form class="form-inline" action="">
+					{{-- TODO: Implement the search backend logic. --}}
 					<input placeholder="De naam of email adres" class="form-control" type="text" name="term">
 					<button type="submit" class="btn btn-danger">Zoek</button>
 				</form>
 			</span>
 
 			<span class="pull-right">
-				<a href="#" class="btn btn-default">Nieuwe gebruiker</a>
+				<a href="#" data-toggle="modal" data-target="#new-user" class="btn btn-default">Nieuwe gebruiker</a>
 			</span>
 		</div> {{-- Menu --}}
 	</div>
@@ -49,6 +50,7 @@
 												<a href="" class="label label-warning">Wijzig</a>
 
 												@if ((string) $user->blocked === 'N')
+													{{-- TODO: Implement the logic in the modal. --}}
 													<a href="#" class="label label-danger" onclick="getDataById('{{ base_url('users/getById/' . $user->id) }}', '#block-user')">Blokkeer</a>
 												@elseif ((string) $user->blocked === 'Y')
 													<a href="" class="label label-info">Activeer</a>
@@ -69,5 +71,6 @@
 
 	{{-- Modal includes --}}
 		@include('users/includes/block-modal')
+		@include('users/includes/create-modal')
 	{{-- /Modal includes --}}
 @endsection

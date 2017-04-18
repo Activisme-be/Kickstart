@@ -33,6 +33,7 @@ class Users extends MY_Controller
 		$data['title'] 	     = 'Gebruikers';
 		$data['users'] 		 = Authencate::all();
 		$data['permissions'] = Permissions::all();
+		$data['abilities']   = Abilities::all();
 
 		return $this->blade->render('users/index', $data);
 	}

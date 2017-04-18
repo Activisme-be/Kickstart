@@ -1,5 +1,10 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
+/**
+ * Class Authencation
+ *
+ * TODO: Document the abilities and permissions. (Google Doc)
+ */
 class Authencation extends MY_Controller
 {
 	public $user        = [];
