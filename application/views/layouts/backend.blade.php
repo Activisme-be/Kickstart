@@ -42,13 +42,18 @@
             			<li><a href="{{ base_url('volunteer/index') }}">Vrijwilligers</a></li>
           			</ul>
 
-          			<ul class="nav navbar-nav navbar-right">
-              			<li>
-                  			<a href="#">
+          			<ul class="nav navbar-nav navbar-right"> {{-- user menu --}}
+              			<li class="dropdown">
+                  			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 								{{ $this->user['name'] }} ({{ $this->user['username'] }}) <span class="caret"></span>
                   			</a>
+
+							<ul class="dropdown-menu">
+								<li><a href="{{ base_url('account/settings') }}">Account instellingen</a></li>
+								<li><a href="{{ base_url('authencation/logout') }}">Uitloggen</a></li>
+							</ul>
               			</li>
-          			</ul>
+          			</ul> {{-- /User meni --}}
         		</div>{{--/.nav-collapse --}}
       		</div>
     	</nav>
