@@ -37,6 +37,18 @@ class Users extends MY_Controller
 		return $this->blade->render('users/index', $data);
 	}
 
+	/**
+	 * Get the suer information by the id.
+	 *
+	 * @return JSON response
+	 */
+	public function getById()
+	{
+		$userId = $this->security->xss_clean($this->uri->segment(3));
+		$userDb = Authencate::select(['name', 'id'])->find($userId);
+
+		echo json_encode($userDb);
+	}
 
 	/**
 	 * Block a user from the system.
@@ -58,7 +70,7 @@ class Users extends MY_Controller
 		// No validation errors. So move on with our logic.
 		$userId = $this->security->xss_clean($this->uri->segment(3));
 
-		$reason = Ban::create($input);
+		$reason = Ban::create($input); // TODO: Create the input fields.
 		$ban    = Authencate::find($userId)->update(['blocked' => 'N', 'ban_id' => $reason->id]);
 
 		if ($ban && $reason) { // The user has been blocked.

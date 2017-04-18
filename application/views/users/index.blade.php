@@ -48,11 +48,11 @@
 												<a href="" class="label label-success">Bekijk</a>
 												<a href="" class="label label-warning">Wijzig</a>
 
-												@if((string) $user->blocked === 'N') {{-- Block user method --}}
-													<a href="" class="label label-danger">Blokkeer</a>
+												@if ((string) $user->blocked === 'N')
+													<a href="#" class="label label-danger" onclick="getDataById('{{ base_url('users/getById/' . $user->id) }}', '#block-user')">Blokkeer</a>
 												@elseif ((string) $user->blocked === 'Y')
 													<a href="" class="label label-info">Activeer</a>
-												@endif {{-- /Block user method --}}
+												@endif
 
 												<a href="{{ base_url('users/delete/' . $user->id) }}" class="label label-danger">Verwijder</a>
 											</td> {{-- /Options --}}
@@ -66,4 +66,8 @@
 			</div>
 		</div> {{-- />Main content --}}
     </div>
+
+	{{-- Modal includes --}}
+		@include('users/includes/block-modal')
+	{{-- /Modal includes --}}
 @endsection

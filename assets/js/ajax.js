@@ -13,10 +13,11 @@ function getDataById(hyperlink, modalName) {
 	$.ajax({
 		url 		: hyperlink,
 		type		: 'GET',
-		dataType	: 'JSON',
+		dataType	: "JSON",
 		success 	: function (data) {
 			// Console.log(data);
 			$('[name="id"]').val(data.id);
+			$('[name="name"]').val(data.name);
 
 			// Trigger modal.
 			$(modalName).modal('show'); // Show bootstrap modal when complete loaded
