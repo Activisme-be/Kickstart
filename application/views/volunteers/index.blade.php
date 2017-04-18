@@ -29,7 +29,7 @@
 
                                             <td> {{-- Options --}}
                                                 <a href="#" class="label label-warning">Wijzig</a>
-                                                <a href="#" class="label label-danger">Verwijder</a>
+                                                <a href="{{ base_url('volunteer/delete/' . $volunteer->id) }}" class="label label-danger">Verwijder</a>
                                             </td> {{-- /Options --}}
                                         </tr>
                                     @endforeach
