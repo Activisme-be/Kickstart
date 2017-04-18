@@ -1,10 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Class Users
+ */
 class Users extends MY_Controller
 {
-	public $user        = []; /** */
-	public $abilities   = []; /** */
-	public $permissions = []; /** */
+	public $user        = []; /** @var array $user 			The authencated userdata		  */
+	public $abilities   = []; /** @var array $abilities		The authencated user abilities	  */
+	public $permissions = []; /** @var array $permissions	The authencated user permissions. */
 
 	/**
 	 * Users constructor.
@@ -23,9 +26,14 @@ class Users extends MY_Controller
 
 	}
 
+	/**
+	 * The middleware class for the controller.
+	 *
+	 * @return array
+	 */
 	protected function middleware()
 	{
-		return [];
+		return ['auth'];
 	}
 
 	/**
@@ -63,21 +71,25 @@ class Users extends MY_Controller
 	 */
 	public function block()
 	{
-		$this->form_validation->set_rules('', '', '');
-		$this->form_validation->set_rules('', '', '');
+		$this->form_validation->set_rules('id', 'Gebruikers identificatie', 'trim|required');
+		$this->form_validation->set_rules('reason', 'Reden', 'trim|required');
 
 		if ($this->form_validation->run() === false) { // Form validation fails.
 			$data['title'] = 'Gebruikers';
 			$data['users'] = Authencate::all();
 
+			dump(validation_errors());
+			die();
+
 			return $this->blade->render('users/index', $data);
 		}
 
 		// No validation errors. So move on with our logic.
-		$userId = $this->security->xss_clean($this->uri->segment(3));
+		$userId = $this->security->xss_clean($this->input->post('id'));
 
-		$reason = Ban::create($input); // TODO: Create the input fields.
-		$ban    = Authencate::find($userId)->update(['blocked' => 'N', 'ban_id' => $reason->id]);
+		// TODO: Create ban model.
+		$reason = Ban::create(['author_id' => $this->user['id'], 'reason' => $this->security->xss_clean($this->input->post('reason'))]);
+		$ban    = Authencate::find($userId)->update(['blocked' => 'Y', 'ban_id' => $reason->id]);
 
 		if ($ban && $reason) { // The user has been blocked.
 			$this->session->set_flashdata('class', '');

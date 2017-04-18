@@ -8,7 +8,7 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="" class="form-horizontal" method="POST" id="form">
+				<form action="{{ base_url('users/block') }}" class="form-horizontal" method="POST" id="form">
 					{{-- TODO: Implement csrf token. --}}
 
 					<input type="hidden" name="id" value="">

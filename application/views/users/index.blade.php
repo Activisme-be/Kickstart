@@ -31,6 +31,7 @@
 								<thead>
 									<tr>
 										<th>#</th>
+										<th>Status:</th>
 										<th>Naam:</th>
 										<th>Gebruikersnaam:</th>
 										<th>Email:</th>
@@ -41,6 +42,15 @@
 									@foreach ($users as $user)
 										<tr>
 											<td>#{{ $user->id }}</td>
+
+											<td> {{-- status --}}
+												@if ((string) $user->blocked === 'N')
+													<span class="label label-success">Actief</span>
+												@elseif ((string) $user->blocked === 'Y')
+													<span class="label label-danger">Geblokkeerd</span>
+												@endif
+											</td> {{-- /status --}}
+
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->username }}</td>
 											<td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
@@ -50,7 +60,7 @@
 												<a href="" class="label label-warning">Wijzig</a>
 
 												@if ((string) $user->blocked === 'N')
-													{{-- TODO: Implement the logic in the modal. --}}
+													{{-- Href tag not needed to fill in because onclick="" function --}}
 													<a href="#" class="label label-danger" onclick="getDataById('{{ base_url('users/getById/' . $user->id) }}', '#block-user')">Blokkeer</a>
 												@elseif ((string) $user->blocked === 'Y')
 													<a href="" class="label label-info">Activeer</a>
